@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel ./src --out-dir ./build",
     "start": "nodemon --exec babel-node src/server.js",
-    "lint": "eslint ."
+    "lint": "eslint . --ext .js --ext .gql --ext .graphql"
   },
   "author": "",
   "license": "ISC",
@@ -23,5 +23,11 @@
     "eslint-plugin-prettier": "^4.0.0",
     "nodemon": "^2.0.13",
     "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "@graphql-tools/schema": "^8.3.0",
+    "apollo-server": "^3.4.0",
+    "graphql": "^15.6.1",
+    "graphql-tag": "^2.12.5"
   }
 }
