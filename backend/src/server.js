@@ -1,8 +1,18 @@
 import { ApolloServer } from 'apollo-server'
-import schema from './schema'
+import { config } from 'dotenv'
+import MongoConnection from './database/config/connection'
 
-const server = new ApolloServer({ schema })
+const init = async () => {
+  try {
+    await MongoConnection()
 
-server.listen().then(({ url }) => {
-  console.log(`Server ready at ${url}`)
-})
+    // const server = new ApolloServer({})
+    // const { url } = await server.listen()
+    // console.log(`Server running at ${url}`)
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+config()
+init()
