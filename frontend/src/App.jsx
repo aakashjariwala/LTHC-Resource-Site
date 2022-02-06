@@ -1,5 +1,5 @@
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
-// import CreateAcct from './views/CreateAccount'
+import CreateAccount from './views/CreateAccount'
 import Login from './views/Login'
 
 const theme = createTheme({
@@ -13,6 +13,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Login />
+      <CreateAccount />
     </ThemeProvider>
   )
 }
