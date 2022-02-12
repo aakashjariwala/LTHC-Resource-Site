@@ -125,7 +125,7 @@ function App() {
           style={{ background: '#FFFFFF' }}
         >
           <Stack direction="column">
-            <Stack direction="row">
+            <Stack direction={{ xs: 'column', md: 'row' }}>
               <Container
                 style={{
                   width: '47%',
@@ -198,7 +198,7 @@ function App() {
                 </Stack>
               </Container>
             </Stack>
-            <Stack direction="row">
+            <Stack direction={{ xs: 'column', md: 'row' }}>
               <Container
                 style={{
                   width: '47%',
@@ -225,6 +225,7 @@ function App() {
                 }}
               >
                 <img
+                  display={{ xs: 'none', md: 'block' }}
                   src="stock image.jpg"
                   width="60%"
                   height="80%"
