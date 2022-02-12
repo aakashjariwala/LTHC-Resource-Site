@@ -5,7 +5,8 @@ const resolver = {
   Mutation: {
     login: async (_, { username, password }) => {
       const user = await getUser(username)
-      return user && user.password === password
+      if (user) return user.validatePassword(password)
+      return false
     },
     createUser: async (_, { username, password }) => {
       const user = await createUser(username, password)
