@@ -16,45 +16,7 @@ import Grid from '@mui/material/Grid'
 export default function SimpleAccordion() {
   return (
     <div>
-      <h2 align="center">Requirements to qualify for services</h2>
       <Grid container columnSpacing={3} alignItems="left" justifyContent="left">
-        <Grid item xs={10} sm={12}>
-          <div>
-            <br />
-            <TableContainer align="right" component={Paper}>
-              <Table align="center" aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="left">Individuals/Families</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableCell>
-                    If you are an individual or family, <br /> to qualify for
-                    services at LTHC Homeless Services, you must: <br />~ be
-                    located in Tippecanoe County, IN; and <br />~ not have any
-                    housing (this includes not having friends/family to stay
-                    with)
-                  </TableCell>
-                </TableBody>
-                <br />
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="left">Veterans</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableCell>
-                    ~ be located in Benton, Clinton, Carroll, White, Tippecanoe,
-                    Fountain, <br /> Warren, Montgomery Counties; and <br />~ be
-                    at-at risk for or already experiencing homelessness
-                  </TableCell>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div>
-        </Grid>
-
         <Grid item xs={10} sm={12}>
           <br />
           <h2 align="center">Information about each category</h2>
