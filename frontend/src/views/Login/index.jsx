@@ -16,10 +16,8 @@ const Login = () => {
 
   useEffect(() => {
     if (error) {
-      alert('Error logging in!')
       reset()
     } else if (data !== undefined) {
-      alert(data.login ? 'Success!' : 'Invalid login!')
       reset()
     }
   }, [loading, error, data])

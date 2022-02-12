@@ -16,10 +16,8 @@ const CreateAccount = () => {
 
   useEffect(() => {
     if (error) {
-      alert('Error creating account!')
       reset()
     } else if (data !== undefined) {
-      alert(data.createUser ? 'Success!' : 'Failure!')
       reset()
     }
   }, [loading, error, data])
