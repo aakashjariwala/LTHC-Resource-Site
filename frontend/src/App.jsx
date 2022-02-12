@@ -1,7 +1,12 @@
 import { useState } from 'react'
+import Accordion from './Accordion'
 
 function App() {
-  return <></>
+  return (
+    <>
+      <Accordion />
+    </>
+  )
 }
 
 export default App
