@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/server.js",
+    "start": "babel-node src/server.js",
+    "dev": "nodemon --exec npm start",
     "build": "babel ./src --out-dir ./build",
     "lint": "eslint . --ext .js --ext .gql --ext .graphql"
   },
