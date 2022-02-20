@@ -19,7 +19,7 @@ import Grid from '@mui/material/Grid'
 import { useState } from 'react'
 
 function App() {
-  // unFinished components for TopBar later
+  // unFinished components for Buttons later
 
   const [anchorIndividuals, setAnchorIndividuals] = useState(null)
   const openIndividualsMenu = Boolean(anchorIndividuals)
@@ -29,220 +29,73 @@ function App() {
   const openVeteransMenu = Boolean(anchorVeterans)
 
   return (
-    // TopBar code
-
-    <Box style={{ background: '#2F579B' }}>
-      <AppBar
-        position="static"
-        style={{ width: '100%', background: '#FFFFFF' }}
-      >
-        <Toolbar>
-          <Stack
-            direction="row"
-            spacing={2}
-            divider={<Divider orientation="vertical" flexItem />}
-            style={{ width: '100%' }}
-          >
-            <Stack direction="row" style={{ width: '50%' }}>
-              <Box style={{ margin: 'auto' }}>
-                <img src="LTHC LOGO.jpg" height="80px" alt="logo" />
-              </Box>
-              <Box style={{ float: 'right', margin: 'auto' }}>
-                <Typography variant="h3" component="div" color="#2F579B">
-                  <b>LTHC Homeless Services</b>
-                </Typography>
-              </Box>
-            </Stack>
-            <Box style={{ width: '50%' }}>
-              <Stack direction="row" /* spacing={14} */>
-                <Box style={{ width: '33%', margin: 'auto' }}>
-                  <Button
-                    id="basic-button"
-                    aria-controls="basic-menu"
-                    aria-haspopup="true"
-                    aria-expanded={openFamiliesMenu ? 'true' : undefined}
-                    onClick={(e) => setAnchorFamilies(e.currentTarget)}
-                    sx={{ color: '#2F579B', textTransform: 'none' }}
-                    endIcon={<KeyboardArrowDownIcon />}
-                  >
-                    <h1>
-                      <b>Families</b>
-                    </h1>
-                  </Button>
-                </Box>
-
-                <Box style={{ width: '33%', margin: 'auto' }}>
-                  <Button
-                    id="basic-button"
-                    aria-controls="basic-menu"
-                    aria-haspopup="true"
-                    aria-expanded={openVeteransMenu ? 'true' : undefined}
-                    onClick={(e) => setAnchorVeterans(e.currentTarget)}
-                    sx={{ color: '#2F579B', textTransform: 'none' }}
-                    endIcon={<KeyboardArrowDownIcon />}
-                  >
-                    <h1>
-                      <b>Veterans</b>
-                    </h1>
-                  </Button>
-                </Box>
-
-                <Box style={{ width: '33%', margin: 'auto' }}>
-                  <Button
-                    id="basic-button"
-                    aria-controls="basic-menu"
-                    aria-haspopup="true"
-                    aria-expanded={openIndividualsMenu ? 'true' : undefined}
-                    onClick={(e) => setAnchorIndividuals(e.currentTarget)}
-                    sx={{ color: '#2F579B', textTransform: 'none' }}
-                    endIcon={<KeyboardArrowDownIcon />}
-                  >
-                    <h1>
-                      <b>Individuals</b>
-                    </h1>
-                  </Button>
-                </Box>
-              </Stack>
-            </Box>
-          </Stack>
-        </Toolbar>
-      </AppBar>
-      <Box
-        style={{
-          background: '#2F579B',
-          display: 'flex',
-          width: '100%',
-          height: '100%',
+    <Container sx={{ background: '#2F579B', display: 'flex' }}>
+      <Container
+        sx={{
+          background: '#FFFFFF',
+          marginTop: '30px',
+          marginBottom: '30px',
+          marginRight: '20px',
+          marginLeft: '20px',
         }}
       >
-        <Box
-          sx={{
-            marginTop: '6%',
-            marginBottom: '5%',
-            marginLeft: '13%',
-            marginRight: '13%',
-          }}
-          style={{ background: '#FFFFFF' }}
-        >
-          <Stack direction="column">
-            <Stack direction={{ xs: 'column', md: 'row' }}>
-              <Container
-                style={{
-                  width: '47%',
-                  marginLeft: '3%',
-                  background: '#CCCCCC',
-                  marginBottom: '3%',
-                  marginTop: '3%',
-                }}
-              >
-                <html lang="en">
-                  <div style={{ fontFamily: 'sans-serif' }}>
-                    <b>
-                      <br />
-                      If you are an individual or family, to qualify for
-                      services at LTHC Homeless Services, you must: <br />{' '}
-                      <br />- Be located in Tippecanoe County, Indiana; and{' '}
-                      <br /> <br />- Not have any housing (this includes not
-                      having friends/family to stay with) <br />{' '}
-                    </b>
-                  </div>
-                </html>
-              </Container>
-              <Container
-                style={{
-                  width: '50%',
-                }}
-              >
-                <div style={{ textAlign: 'center', fontFamily: 'sans-serif' }}>
-                  <b>
-                    <br />
-                    Please choose the option that best describes you:
-                    <br />
-                  </b>
-                </div>
-                <Stack
-                  style={{ marginTop: '3%' }}
-                  spacing={2}
-                  divider={<Divider orientation="horizontal" flexItem />}
-                >
-                  <Button
-                    variant="contained"
-                    style={{
-                      width: '30%',
-                      marginLeft: '35%',
-                      marginRight: '35%',
-                    }}
-                  >
-                    Family
-                  </Button>
-                  <Button
-                    variant="contained"
-                    style={{
-                      width: '30%',
-                      marginLeft: '35%',
-                      marginRight: '35%',
-                    }}
-                  >
-                    Veteran
-                  </Button>
-                  <Button
-                    variant="contained"
-                    style={{
-                      width: '30%',
-                      marginLeft: '35%',
-                      marginRight: '35%',
-                    }}
-                  >
-                    Individual
-                  </Button>
-                </Stack>
-              </Container>
-            </Stack>
-            <Stack direction={{ xs: 'column', md: 'row' }}>
-              <Container
-                style={{
-                  width: '47%',
-                  marginLeft: '3%',
-                  marginBottom: '3%',
-                  background: '#CCCCCC',
-                }}
-              >
-                <div style={{ fontFamily: 'sans-serif' }}>
-                  <b>
-                    <br />
-                    If you are a Veteran, to qualify for services at LTHC
-                    Homeless Services, you must: <br />
-                    <br />- Be located in Benton, Clinton, Carroll, White,
-                    Tippecanoe, Fountain, Warren, Montgomery Counties; and
-                    <br />
-                    <br />- Be at risk for or already experiencing homelessness
-                  </b>
-                </div>
-              </Container>
-              <Container
-                style={{
-                  width: '50%',
-                }}
-              >
-                <img
-                  display={{ xs: 'none', md: 'block' }}
-                  src="stock image.jpg"
-                  width="60%"
-                  height="80%"
-                  alt="stock"
-                  style={{
-                    marginLeft: '20%',
-                    marginRight: '20%',
-                    marginBottom: '3%',
-                    marginTop: '3%',
-                  }}
-                />
-              </Container>
-            </Stack>
+        <Stack sx={{ alignItems: 'center', marginTop: '10px' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              border: 3,
+              borderRadius: 3,
+              borderColor: '#2F579B',
+              width: 'fit-content',
+              padding: '10px',
+            }}
+          >
+            <img src="LTHC LOGO.jpg" alt="logo" height="80px" />
+            <Typography variant="h4" sx={{ color: '#2F579B' }}>
+              <b> LTHC Homeless Services</b>
+            </Typography>
+          </Box>
+        </Stack>
+        <Stack sx={{ alignItems: 'center' }}>
+          <Typography sx={{ textAlign: 'center' }}>
+            <h3 style={{ color: '#2F579B', fontFamily: 'sans-serif' }}>
+              Since 1989, LTHC has helped community families, veterans, and
+              those with disabilities find stable housing and self-sufficiency.{' '}
+              <br />
+              <br />
+              Our nonprofit offers unique programs for our guests, because no
+              two are the same. And, we teach others how to end homelessness by
+              helping community members stay educated.
+            </h3>
+            <h1 style={{ color: '#2F579B', fontFamily: 'sans-serif' }}>
+              Please select one of the following:
+            </h1>
+          </Typography>
+          <Stack direction={{ xs: 'column', md: 'row' }}>
+            <Button
+              variant="outlined"
+              sx={{ borderRadius: 3, border: 2, margin: '15px' }}
+            >
+              Veteran
+            </Button>
+            <Button
+              variant="outlined"
+              sx={{ borderRadius: 3, border: 2, margin: '15px' }}
+            >
+              Individual
+            </Button>
+            <Button
+              variant="outlined"
+              sx={{ borderRadius: 3, border: 2, margin: '15px' }}
+            >
+              Family
+            </Button>
           </Stack>
-        </Box>
-      </Box>
-    </Box>
+        </Stack>
+      </Container>
+    </Container>
   )
 }
 
