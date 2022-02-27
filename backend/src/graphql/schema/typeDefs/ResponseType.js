@@ -6,6 +6,12 @@ const typeDefs = gql`
     error: Int
     errorMessage: String
   }
+
+  type SimpleResponse implements BaseResponse {
+    success: Boolean!
+    error: Int
+    errorMessage: String
+  }
 `
 
 export default typeDefs

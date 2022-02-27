@@ -1,5 +1,8 @@
 const resolver = {
-  Query: {},
+  Query: {
+    getDoc: {},
+    getSection: {},
+  },
 }
 
 export default resolver

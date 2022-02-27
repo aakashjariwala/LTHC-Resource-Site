@@ -20,3 +20,5 @@ export const createUser = async (username, password) => {
     return [undefined, error]
   }
 }
+
+// TODO: edit user

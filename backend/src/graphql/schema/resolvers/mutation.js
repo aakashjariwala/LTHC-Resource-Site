@@ -35,10 +35,10 @@ const resolver = {
     },
     logout: async (_, __, context) => {
       if (context.validateToken()) {
-        context.deleteSession()
-        return true
+        context.deleteToken()
+        return { success: true }
       }
-      return false
+      return { success: false }
     },
     validate: async (_, __, context) => {
       const token = context.validateToken()
@@ -55,6 +55,9 @@ const resolver = {
       }
       return { success: false, error: 2, errorMessage: 'Invalid token' }
     },
+    addSection: async (_, { section }, context) => {},
+    editSection: async (_, { sectionId, section }, context) => {},
+    removeSection: async (_, { sectionId }, context) => {},
   },
 }
 
