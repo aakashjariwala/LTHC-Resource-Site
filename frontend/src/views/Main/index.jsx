@@ -1,6 +1,7 @@
 import { Container, Typography, Box, Button } from '@mui/material'
 import { Element, scroller } from 'react-scroll'
 import RequirementAccordion from '../../components/RequirementAccordion'
+import Resources from '../../components/Resources/Resources'
 
 function Main() {
   const onScroll = () => {
@@ -13,6 +14,7 @@ function Main() {
   return (
     <Container>
       <RequirementAccordion />
+      <Resources />
     </Container>
   )
 }
