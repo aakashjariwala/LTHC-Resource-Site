@@ -5,13 +5,6 @@ import RequirementAccordion from '../../components/RequirementAccordion'
 import Resources from '../../components/Resources'
 
 function Main() {
-  const onScroll = () => {
-    scroller.scrollTo('demo', {
-      duration: 300,
-      smooth: true,
-    })
-  }
-
   return (
     <Container py={3}>
       <FirstView />
