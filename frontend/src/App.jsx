@@ -1,36 +1,34 @@
-import { useState } from 'react'
-import { Element, scroller } from 'react-scroll'
-import Button from './components/Button'
-import ResponsiveAppBar from './components/NavBar'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
+import CreateAccount from './views/CreateAccount'
+import Login from './views/Login'
+import Main from './views/Main'
 
 function App() {
+  const theme = createTheme({
+    components: {
+      MuiButtonBase: {
+        defaultProps: {
+          disableRipple: true,
+        },
+      },
+    },
+    typography: {
+      button: { textTransform: 'none' },
+    },
+  })
   return (
     <>
-      <ResponsiveAppBar />
-      <div id="home" style={{ height: 500 }}>
-        <h1>This is Home section</h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
-        repellendus. Totam nihil similique a repellat minus dolor amet quasi.
-        Corporis nulla quaerat iste, sed quasi ab dolorem maxime minima animi.
-      </div>
-      <div id="about" style={{ height: 500 }}>
-        <h1>This is About section</h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
-        repellendus. Totam nihil similique a repellat minus dolor amet quasi.
-        Corporis nulla quaerat iste, sed quasi ab dolorem maxime minima animi.
-      </div>
-      <div id="contact" style={{ height: 500 }}>
-        <h1>This is Contact section</h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
-        repellendus. Totam nihil similique a repellat minus dolor amet quasi.
-        Corporis nulla quaerat iste, sed quasi ab dolorem maxime minima animi.
-      </div>
-      <div id="service" style={{ height: 500 }}>
-        <h1>This is Service section</h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id,
-        repellendus. Totam nihil similique a repellat minus dolor amet quasi.
-        Corporis nulla quaerat iste, sed quasi ab dolorem maxime minima animi.
-      </div>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/createAccount" element={<CreateAccount />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     </>
   )
 }

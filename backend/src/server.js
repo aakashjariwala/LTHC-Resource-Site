@@ -1,8 +1,27 @@
 import { ApolloServer } from 'apollo-server'
-import schema from './schema'
+import { config } from 'dotenv'
+import schema from './graphql/schema'
+import MongoConnection from './database/config/connection'
+import { createSession, validateSession, deleteSession } from './graphql/auth'
 
-const server = new ApolloServer({ schema })
+const init = async () => {
+  try {
+    await MongoConnection()
 
-server.listen().then(({ url }) => {
-  console.log(`Server ready at ${url}`)
-})
+    const server = new ApolloServer({
+      schema,
+      context: ({ req, res }) => ({
+        createSession: (username) => createSession(username, res),
+        validateSession: () => validateSession(req),
+        deleteSession: () => deleteSession(res),
+      }),
+    })
+    const { url } = await server.listen()
+    console.log(`Server running at ${url}`)
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+config()
+init()
