@@ -6,7 +6,7 @@ import Resources from '../../components/Resources'
 
 function Main() {
   return (
-    <Container py={3}>
+    <Container sx={{ py: 5 }}>
       <FirstView />
       <RequirementAccordion />
       <Resources />
