@@ -10,11 +10,14 @@ const init = async () => {
 
     const server = new ApolloServer({
       schema,
-      context: ({ req, res }) => ({
-        createToken: (username) => createToken(username, res),
-        validateToken: () => validateToken(req),
-        deleteToken: () => deleteToken(res),
-      }),
+      context: ({ req, res }) => {
+        const { username: validatedUsername } = validateToken(req)
+        return {
+          username: validatedUsername,
+          createToken: (username) => createToken(username, res),
+          deleteToken: () => deleteToken(res),
+        }
+      },
     })
     const { url } = await server.listen()
     console.log(`Server running at ${url}`)

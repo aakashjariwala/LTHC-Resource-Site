@@ -94,7 +94,7 @@ export const getWholeDoc = async (docId = undefined) => {
     return [undefined, error]
   }
   const sectionsRequest = []
-  doc.sections.map((sectionId) =>
+  doc.sections.forEach((sectionId) =>
     sectionsRequest.push(handle(Section.findById(sectionId)))
   )
   const [res, errorAll] = handle(Promise.all(sectionsRequest))
@@ -103,7 +103,7 @@ export const getWholeDoc = async (docId = undefined) => {
     return [undefined, errorAll]
   }
   const sections = []
-  res.map((section) => sections.push(section))
+  res.forEach((result) => sections.push(result[0]))
   doc.sections = sections
   return [doc, undefined]
 }

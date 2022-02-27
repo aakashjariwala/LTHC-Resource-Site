@@ -11,13 +11,11 @@ const sectionSchema = new mongoose.Schema(
       required: true,
     },
     header: {
-      type: {
-        level: {
-          type: Number,
-        },
-        text: {
-          type: String,
-        },
+      level: {
+        type: Number,
+      },
+      text: {
+        type: String,
       },
     },
     body: {

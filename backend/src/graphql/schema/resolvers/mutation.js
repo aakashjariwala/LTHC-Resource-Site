@@ -4,10 +4,13 @@ import { getUser, createUser } from '../../../store'
 const resolver = {
   Mutation: {
     login: async (_, { username, password }, context) => {
+      if (context.username) {
+        return { success: false, error: 3, errorMessage: 'Already logged in!' }
+      }
       const [user, error] = await getUser(username)
       if (user) {
         if (user.validatePassword(password)) {
-          if (!context.validateToken()) context.createToken(username)
+          context.createToken(username)
           return { success: true, data: user }
         }
         return { success: false, error: 1, errorMessage: 'Incorrect Password' }
@@ -19,6 +22,9 @@ const resolver = {
       }
     },
     createUser: async (_, { username, password }, context) => {
+      if (context.username) {
+        return { success: false, error: 3, errorMessage: 'Already logged in!' }
+      }
       const [user, error] = await getUser(username)
       if (error) {
         return { success: false, error: 1, errorMessage: error }
@@ -34,16 +40,15 @@ const resolver = {
       return { success: false, error: 1, errorMessage: createError }
     },
     logout: async (_, __, context) => {
-      if (context.validateToken()) {
+      if (context.username) {
         context.deleteToken()
         return { success: true }
       }
-      return { success: false }
+      return { success: false, errorMessage: 'Invalid token' }
     },
     validate: async (_, __, context) => {
-      const token = context.validateToken()
-      if (token && token.username) {
-        const [user, error] = await getUser(token.username)
+      if (context.username) {
+        const [user, error] = await getUser(context.username)
         if (user) {
           return { success: true, data: user }
         }
