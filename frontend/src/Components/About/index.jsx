@@ -17,6 +17,7 @@ import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import { useState } from 'react'
+import constants from '../../constants/about.json'
 
 function App() {
   // unFinished components for Buttons later
@@ -59,20 +60,22 @@ function App() {
           </Box>
         </Stack>
         <Stack sx={{ alignItems: 'center' }}>
-          <Typography sx={{ textAlign: 'center' }}>
-            <h3 style={{ color: '#2F579B', fontFamily: 'sans-serif' }}>
-              Since 1989, LTHC has helped community families, veterans, and
-              those with disabilities find stable housing and self-sufficiency.{' '}
-              <br />
-              <br />
-              Our nonprofit offers unique programs for our guests, because no
-              two are the same. And, we teach others how to end homelessness by
-              helping community members stay educated.
-            </h3>
-            <h1 style={{ color: '#2F579B', fontFamily: 'sans-serif' }}>
-              Please select one of the following:
-            </h1>
+          <Typography
+            variant="h6"
+            sx={{
+              textAlign: 'center',
+              color: '#2F579B',
+              fontFamily: 'sans-serif',
+            }}
+            dangerouslySetInnerHTML={{ __html: constants.about }}
+          />
+          <Typography
+            variant="h4"
+            sx={{ color: '#2F579B', fontFamily: 'sans-serif' }}
+          >
+            <b>Please select one of the following:</b>
           </Typography>
+
           <Stack direction={{ xs: 'column', md: 'row' }}>
             <Button
               variant="outlined"
