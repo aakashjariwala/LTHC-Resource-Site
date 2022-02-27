@@ -1,8 +1,8 @@
 import { ApolloServer } from 'apollo-server'
 import { config } from 'dotenv'
 import schema from './graphql/schema'
-import MongoConnection from './database/config/connection'
-import { createSession, validateSession, deleteSession } from './graphql/auth'
+import MongoConnection from './store/config/connection'
+import { createToken, validateToken, deleteToken } from './graphql/auth'
 
 const init = async () => {
   try {
@@ -11,9 +11,9 @@ const init = async () => {
     const server = new ApolloServer({
       schema,
       context: ({ req, res }) => ({
-        createSession: (username) => createSession(username, res),
-        validateSession: () => validateSession(req),
-        deleteSession: () => deleteSession(res),
+        createToken: (username) => createToken(username, res),
+        validateToken: () => validateToken(req),
+        deleteToken: () => deleteToken(res),
       }),
     })
     const { url } = await server.listen()

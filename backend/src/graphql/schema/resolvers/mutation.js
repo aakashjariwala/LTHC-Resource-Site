@@ -1,33 +1,59 @@
-import { getUser, createUser } from '../../../database'
+import { getUser, createUser } from '../../../store'
 
 // NOTE: if this resolver gets too long, find someway to break it down into diff files and merge objects back together?
 const resolver = {
   Mutation: {
     login: async (_, { username, password }, context) => {
-      const user = await getUser(username)
-      if (user && user.validatePassword(password)) {
-        if (!context.validateSession()) context.createSession()
-        return true
+      const [user, error] = await getUser(username)
+      if (user) {
+        if (user.validatePassword(password)) {
+          if (!context.validateToken()) context.createToken(username)
+          return { success: true, data: user }
+        }
+        return { success: false, error: 1, errorMessage: 'Incorrect Password' }
       }
-      return false
+      return {
+        success: false,
+        error: 2,
+        errorMessage: error,
+      }
     },
     createUser: async (_, { username, password }, context) => {
-      const user = await createUser(username, password)
-      if (user) {
-        context.createSession()
-        return true
+      const [user, error] = await getUser(username)
+      if (error) {
+        return { success: false, error: 1, errorMessage: error }
       }
-      return false
+      if (user) {
+        return { success: false, error: 2, errorMessage: 'User already exists' }
+      }
+      const [newUser, createError] = await createUser(username, password)
+      if (newUser) {
+        context.createToken(username)
+        return { success: true, data: newUser }
+      }
+      return { success: false, error: 1, errorMessage: createError }
     },
     logout: async (_, __, context) => {
-      if (context.validateSession()) {
+      if (context.validateToken()) {
         context.deleteSession()
         return true
       }
       return false
     },
     validate: async (_, __, context) => {
-      return context.validateSession()
+      const token = context.validateToken()
+      if (token && token.username) {
+        const [user, error] = await getUser(token.username)
+        if (user) {
+          return { success: true, data: user }
+        }
+        return {
+          success: false,
+          error: 1,
+          errorMessage: error || 'User could not be found',
+        }
+      }
+      return { success: false, error: 2, errorMessage: 'Invalid token' }
     },
   },
 }

@@ -1,7 +1,7 @@
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import { gql } from 'graphql-tag'
 import { MutationRes, QueryRes, UserRes } from './resolvers'
-import { UserType } from './typeDefs'
+import { UserType, ResponseType } from './typeDefs'
 
 const Query = gql`
   type Query {
@@ -15,6 +15,6 @@ const Mutation = gql`
 `
 
 export default makeExecutableSchema({
-  typeDefs: [Query, Mutation, UserType],
+  typeDefs: [Query, Mutation, UserType, ResponseType],
   resolvers: { ...QueryRes, ...UserRes, ...MutationRes },
 })
