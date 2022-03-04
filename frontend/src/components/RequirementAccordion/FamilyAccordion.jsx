@@ -18,10 +18,10 @@ export default function VeteranAccordion() {
       <AccordionDetails>
         <Typography>
           If you are a family, to qualify for services at LTHC Homeless
-          Services, you must::
+          Services, you must:
         </Typography>
         <Typography>
-          ~ be located in Tippecanoe County, IN; and <br />~ not have any
+          - be located in Tippecanoe County, IN; and <br />- not have any
           housing (this includes not having friends/family to stay with)
         </Typography>
         <Typography>Resources: </Typography>
