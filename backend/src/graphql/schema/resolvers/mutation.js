@@ -1,4 +1,10 @@
-import { getUser, createUser } from '../../../store'
+import {
+  getUser,
+  createUser,
+  addSection,
+  editSection,
+  removeSection,
+} from '../../../store'
 
 // NOTE: if this resolver gets too long, find someway to break it down into diff files and merge objects back together?
 const resolver = {
@@ -44,7 +50,7 @@ const resolver = {
         context.deleteToken()
         return { success: true }
       }
-      return { success: false, errorMessage: 'Invalid token' }
+      return { success: false, error: 1, errorMessage: 'Invalid token' }
     },
     validate: async (_, __, context) => {
       if (context.username) {
@@ -60,23 +66,35 @@ const resolver = {
       }
       return { success: false, error: 2, errorMessage: 'Invalid token' }
     },
-    addSection: async (_, { section }, context) => {
+    addSection: async (_, { section, docId }, context) => {
       if (context.username) {
-        return { success: true }
+        const [newSection, error] = await addSection(section, docId)
+        if (error) {
+          return { success: false, error: 1, errorMessage: error }
+        }
+        return { success: true, data: newSection }
       }
-      return { success: false, errorMessage: 'Unauthorized' }
+      return { success: false, error: 401, errorMessage: 'Unauthorized' }
     },
     editSection: async (_, { sectionId, section }, context) => {
       if (context.username) {
-        return { success: true }
+        const [edited, error] = await editSection(sectionId, section)
+        if (error) {
+          return { success: false, error: 1, errorMessage: error }
+        }
+        return { success: true, data: edited }
       }
-      return { success: false, errorMessage: 'Unauthorized' }
+      return { success: false, error: 401, errorMessage: 'Unauthorized' }
     },
     removeSection: async (_, { sectionId }, context) => {
       if (context.username) {
+        const [removed, error] = await removeSection(sectionId)
+        if (error) {
+          return { success: false, error: 1, errorMessage: error }
+        }
         return { success: true }
       }
-      return { success: false, errorMessage: 'Unauthorized' }
+      return { success: false, error: 401, errorMessage: 'Unauthorized' }
     },
   },
 }

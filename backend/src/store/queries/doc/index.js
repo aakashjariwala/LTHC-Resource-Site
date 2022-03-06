@@ -1,6 +1,17 @@
 import handle from '../../../util/handle'
 import { Doc, Section } from '../../schema'
 
+export const createDoc = async () => {
+  try {
+    const doc = new Doc()
+    await doc.save()
+    return [doc, undefined]
+  } catch (error) {
+    console.error(error)
+    return [undefined, error]
+  }
+}
+
 export const getDoc = async (docId = undefined) => {
   // default to first one
   const [res, error] = await handle(Doc.findOne(docId ? { id: docId } : {}))
@@ -8,25 +19,21 @@ export const getDoc = async (docId = undefined) => {
     console.error(error)
     return [undefined, error]
   }
+  // auto create one if not present
+  if (!res) {
+    const [createRes, createErr] = await createDoc()
+    return [createRes, createErr]
+  }
   return [res, undefined]
 }
 
-export const createDoc = async () => {
-  try {
-    const doc = new Doc()
-    await doc.save()
-    return [doc, undefined]
-  } catch (error) {
-    return [undefined, error]
-  }
-}
-
 export const getSection = async (sectionId) => {
-  const [res, error] = await handle(Section.findOneById(sectionId))
+  const [res, error] = await handle(Section.findById(sectionId))
   if (error) {
     console.error(error)
     return [undefined, error]
   }
+  console.error(error)
   return [res, undefined]
 }
 
@@ -41,10 +48,12 @@ export const addSection = async (section, docId = undefined) => {
       ...section,
       docId: doc.id,
     })
-    newSection.save()
-    doc.sections.push(section)
-    doc.save()
+    await newSection.save()
+    doc.sections.push(newSection)
+    await doc.save()
+    return [newSection, undefined]
   } catch (error) {
+    console.error(error)
     return [undefined, error]
   }
 }
@@ -52,58 +61,69 @@ export const addSection = async (section, docId = undefined) => {
 export const editSection = async (sectionId, newSection) => {
   try {
     const [res, error] = await handle(
-      Section.updateOne({ id: sectionId }, newSection, { upsert: false })
+      Section.findOneAndUpdate({ id: sectionId }, newSection, { upsert: false })
     )
     if (error) {
       console.error(error)
       return [undefined, error]
     }
+    console.log(res)
     return [res, undefined]
   } catch (error) {
-    return [false, error]
+    console.error(error)
+    return [undefined, error]
   }
 }
 
 export const removeSection = async (sectionId) => {
   try {
-    const [section, errorFind] = await getSection(sectionId)
+    const [section, errorFind] = await handle(
+      Section.findOneAndRemove({ id: sectionId })
+    )
     if (errorFind) {
       console.error(errorFind)
-      return [false, errorFind]
+      return [undefined, errorFind]
     }
     const [res, errorUpdate] = await handle(
-      Doc.updateOne(
-        { id: section.docId },
-        { $pull: { sections: { id: section.id } } }
-      )
+      Doc.updateOne({ id: section.docId }, { $pull: { sections: section.id } })
     )
     if (errorUpdate) {
       console.error(errorUpdate)
-      return [false, errorUpdate]
+      return [undefined, errorUpdate]
     }
     return [res, undefined]
   } catch (error) {
-    return [false, error]
+    console.error(error)
+    return [undefined, error]
   }
 }
 
 export const getWholeDoc = async (docId = undefined) => {
-  const [doc, error] = await getDoc(docId)
-  if (error) {
+  try {
+    const [doc, error] = await getDoc(docId)
+    if (error) {
+      console.error(error)
+      return [undefined, error]
+    }
+    const sectionsRequest = []
+    doc.sections.forEach((sectionId) =>
+      sectionsRequest.push(handle(Section.findById(sectionId)))
+    )
+    const [res, errorAll] = await handle(Promise.all(sectionsRequest))
+    if (errorAll) {
+      console.error(errorAll)
+      return [undefined, errorAll]
+    }
+    const sections = []
+    res.forEach((result) => {
+      if (res) {
+        sections.push(result[0])
+      }
+    })
+    doc.sections = sections
+    return [doc, undefined]
+  } catch (error) {
     console.error(error)
     return [undefined, error]
   }
-  const sectionsRequest = []
-  doc.sections.forEach((sectionId) =>
-    sectionsRequest.push(handle(Section.findById(sectionId)))
-  )
-  const [res, errorAll] = handle(Promise.all(sectionsRequest))
-  if (errorAll) {
-    console.error(errorAll)
-    return [undefined, errorAll]
-  }
-  const sections = []
-  res.forEach((result) => sections.push(result[0]))
-  doc.sections = sections
-  return [doc, undefined]
 }

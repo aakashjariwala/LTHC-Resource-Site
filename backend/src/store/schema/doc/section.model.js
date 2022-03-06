@@ -8,31 +8,18 @@ const sectionSchema = new mongoose.Schema(
   {
     docId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
     },
     label: {
       type: String,
       required: true,
     },
     header: {
-      level: {
-        type: Number,
-      },
-      text: {
-        type: String,
-      },
+      type: String,
     },
     body: {
-      text: {
-        type: String,
-      },
+      type: String,
     },
-    subsections: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Section',
-      },
-    ],
+    subsections: {},
   },
   options
 )
