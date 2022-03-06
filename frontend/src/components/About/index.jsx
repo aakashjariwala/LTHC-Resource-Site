@@ -51,7 +51,7 @@ function App() {
           >
             <img src="LTHC LOGO.jpg" alt="logo" height="80px" />
             <Typography variant="h4" sx={{ color: '#2F579B' }}>
-              <b> Jacob's Homeless Services</b>
+              <b> LHTC's Homeless Services</b>
             </Typography>
           </Box>
         </Stack>
