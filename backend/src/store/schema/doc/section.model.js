@@ -10,6 +10,10 @@ const sectionSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
+    label: {
+      type: String,
+      required: true,
+    },
     header: {
       level: {
         type: Number,
@@ -23,6 +27,12 @@ const sectionSchema = new mongoose.Schema(
         type: String,
       },
     },
+    subsections: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Section',
+      },
+    ],
   },
   options
 )

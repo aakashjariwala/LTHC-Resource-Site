@@ -60,9 +60,24 @@ const resolver = {
       }
       return { success: false, error: 2, errorMessage: 'Invalid token' }
     },
-    addSection: async (_, { section }, context) => {},
-    editSection: async (_, { sectionId, section }, context) => {},
-    removeSection: async (_, { sectionId }, context) => {},
+    addSection: async (_, { section }, context) => {
+      if (context.username) {
+        return { success: true }
+      }
+      return { success: false, errorMessage: 'Unauthorized' }
+    },
+    editSection: async (_, { sectionId, section }, context) => {
+      if (context.username) {
+        return { success: true }
+      }
+      return { success: false, errorMessage: 'Unauthorized' }
+    },
+    removeSection: async (_, { sectionId }, context) => {
+      if (context.username) {
+        return { success: true }
+      }
+      return { success: false, errorMessage: 'Unauthorized' }
+    },
   },
 }
 
