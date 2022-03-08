@@ -6,17 +6,20 @@ const cookieOptions = {
   // secure: true,
 }
 
-export const createSession = (username, res) => {
-  res.cookie('session', generateJwt({ username }), cookieOptions)
+// Creates a JWT token
+export const createToken = (username, res) => {
+  res.cookie('token', generateJwt({ username }), cookieOptions)
 }
 
-export const validateSession = (req) => {
+// If session is valid, return the username associated with JWT. Else, return undefined
+export const validateToken = (req) => {
   if (!req.headers.cookie) return false
   const token = req.headers.cookie.split('=')[1]
   if (token === undefined || token === '') return false
   return verifyJwt(token)
 }
 
-export const deleteSession = (res) => {
-  res.clearCookie('session')
+// Deletes token from cookie
+export const deleteToken = (res) => {
+  res.clearCookie('token')
 }

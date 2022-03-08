@@ -2,20 +2,23 @@ import handle from '../../../util/handle'
 import { User } from '../../schema'
 
 export const getUser = async (username) => {
+  // TODO: should probably change return type to obj instead of arr
   const [res, error] = await handle(User.findOne({ username }))
-  if (error) console.error(error)
-  return res
+  if (error) {
+    console.error(error)
+    return [undefined, error]
+  }
+  return [res, undefined]
 }
 
 export const createUser = async (username, password) => {
   try {
-    const exists = await getUser(username)
-    if (exists) return null
     const user = new User({ username, password })
     await user.save()
-    return [user.id, undefined]
+    return [user, undefined]
   } catch (error) {
-    console.error(error)
-    return null
+    return [undefined, error]
   }
 }
+
+// TODO: edit user
