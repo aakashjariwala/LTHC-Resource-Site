@@ -4,15 +4,19 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import ListSubheader from '@mui/material/ListSubheader'
-import { apartment } from '../constants/apartments'
-import { subsidizedHousing } from '../constants/apartments'
-import { mobileHomeParks } from '../constants/apartments'
-import { privateLandlords } from '../constants/apartments'
-import { complexesAndRental } from '../constants/apartments'
+import { apartment } from '../../constants/apartments'
+import { subsidizedHousing } from '../../constants/apartments'
+import { mobileHomeParks } from '../../constants/apartments'
+import { privateLandlords } from '../../constants/apartments'
+import { complexesAndRental } from '../../constants/apartments'
 
 const device = () => {
   const ua = navigator.userAgent
-  if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+  if (
+    /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+      ua
+    )
+  ) {
     return 'mobile'
   }
   return 'desktop'
@@ -198,8 +202,15 @@ export default function landlordTable() {
                   primary={rightApartment[leftApartment.indexOf(item)].name}
                   secondary={
                     <div>
-                      <div>{rightApartment[leftApartment.indexOf(item)].phone}</div>
-                      <div>{rightApartment[leftApartment.indexOf(item)].description}</div>
+                      <div>
+                        {rightApartment[leftApartment.indexOf(item)].phone}
+                      </div>
+                      <div>
+                        {
+                          rightApartment[leftApartment.indexOf(item)]
+                            .description
+                        }
+                      </div>
                     </div>
                   }
                   align="left"
@@ -234,8 +245,15 @@ export default function landlordTable() {
                   primary={rightSubsidized[leftSubsidized.indexOf(item)].name}
                   secondary={
                     <div>
-                      <div>{rightSubsidized[leftSubsidized.indexOf(item)].phone}</div>
-                      <div>{rightSubsidized[leftSubsidized.indexOf(item)].description}</div>
+                      <div>
+                        {rightSubsidized[leftSubsidized.indexOf(item)].phone}
+                      </div>
+                      <div>
+                        {
+                          rightSubsidized[leftSubsidized.indexOf(item)]
+                            .description
+                        }
+                      </div>
                     </div>
                   }
                   align="left"
@@ -271,7 +289,9 @@ export default function landlordTable() {
                   secondary={
                     <div>
                       <div>{rightMobile[leftMobile.indexOf(item)].phone}</div>
-                      <div>{rightMobile[leftMobile.indexOf(item)].description}</div>
+                      <div>
+                        {rightMobile[leftMobile.indexOf(item)].description}
+                      </div>
                     </div>
                   }
                   align="left"
@@ -307,7 +327,9 @@ export default function landlordTable() {
                   secondary={
                     <div>
                       <div>{rightLords[leftLords.indexOf(item)].phone}</div>
-                      <div>{rightLords[leftLords.indexOf(item)].description}</div>
+                      <div>
+                        {rightLords[leftLords.indexOf(item)].description}
+                      </div>
                     </div>
                   }
                   align="left"
@@ -343,7 +365,9 @@ export default function landlordTable() {
                   secondary={
                     <div>
                       <div>{rightComplex[leftComplex.indexOf(item)].phone}</div>
-                      <div>{rightComplex[leftComplex.indexOf(item)].description}</div>
+                      <div>
+                        {rightComplex[leftComplex.indexOf(item)].description}
+                      </div>
                     </div>
                   }
                   align="left"

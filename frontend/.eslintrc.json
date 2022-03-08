@@ -12,7 +12,7 @@
   },
   "plugins": ["react"],
   "rules": {
-    "no-unused-vars": 0,
+    "no-unused-vars": 1,
     "react/react-in-jsx-scope": 0,
     "react/prop-types": 0,
     "jsx-a11y/label-has-associated-control": [
@@ -35,8 +35,7 @@
       "error",
       {
         "endOfLine": "auto",
-        "tabWidth": 2,
-        "printWidth": 120
+        "tabWidth": 2
       }
     ]
   },
