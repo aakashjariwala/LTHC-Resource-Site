@@ -1,31 +1,16 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'
-import Divider from '@mui/material/Divider'
-import { useState } from 'react'
 import constants from '../../constants/about.json'
 
-function App() {
-  // unFinished components for Buttons later
-
-  const [anchorIndividuals, setAnchorIndividuals] = useState(null)
-  const openIndividualsMenu = Boolean(anchorIndividuals)
-  const [anchorFamilies, setAnchorFamilies] = useState(null)
-  const openFamiliesMenu = Boolean(anchorFamilies)
-  const [anchorVeterans, setAnchorVeterans] = useState(null)
-  const openVeteransMenu = Boolean(anchorVeterans)
-
+function About() {
   return (
-    <Container sx={{ background: '#2F579B', display: 'flex' }}>
+    <Container sx={{ backgroundColor: '#2F579B', display: 'flex', p: 2 }}>
       <Container
         sx={{
-          background: '#FFFFFF',
-          marginTop: '30px',
-          marginBottom: '30px',
-          marginRight: '20px',
-          marginLeft: '20px',
+          backgroundColor: '#fff',
+          p: 1,
         }}
       >
         <Stack sx={{ alignItems: 'center', marginTop: '10px' }}>
@@ -38,18 +23,21 @@ function App() {
               borderRadius: 3,
               borderColor: '#2F579B',
               width: 'fit-content',
-              padding: '10px',
+              padding: '10px 25px',
             }}
           >
             <img src="LTHC LOGO.jpg" alt="logo" height="80px" />
-            <Typography variant="h4" sx={{ color: '#2F579B' }}>
-              <b> LTHC&#39;s Homeless Services</b>
+            <Typography
+              variant="h6"
+              sx={{ color: '#2F579B', textAlign: 'center', fontWeight: 800 }}
+            >
+              LTHC&#39;s Homeless Services
             </Typography>
           </Box>
         </Stack>
-        <Stack sx={{ alignItems: 'center' }}>
+        <Stack sx={{ alignItems: 'center', mt: 2 }}>
           <Typography
-            variant="h6"
+            variant="body2"
             sx={{
               textAlign: 'center',
               color: '#2F579B',
@@ -57,7 +45,7 @@ function App() {
             }}
             dangerouslySetInnerHTML={{ __html: constants.about }}
           />
-          <Typography
+          {/* <Typography
             variant="h4"
             sx={{ color: '#2F579B', fontFamily: 'sans-serif' }}
           >
@@ -83,11 +71,11 @@ function App() {
             >
               Family
             </Button>
-          </Stack>
+          </Stack> */}
         </Stack>
       </Container>
     </Container>
   )
 }
 
-export default App
+export default About

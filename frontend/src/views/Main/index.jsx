@@ -1,5 +1,4 @@
 import { Container } from '@mui/material'
-import { scroller } from 'react-scroll'
 import FirstView from '../../components/About'
 import RequirementAccordion from '../../components/RequirementAccordion'
 import Resources from '../../components/Resources'

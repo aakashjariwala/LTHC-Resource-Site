@@ -115,12 +115,12 @@
     {
       "name": "Cambridge Estates",
       "phone": "446-1200",
-      "description": "Tues from 10-4 2511 Malden Rd"
+      "description": "Tues from 10-4. 2511 Malden Rd"
     },
     {
       "name": "Romney Meadows (Claystone)",
       "phone": "474-2464",
-      "description": "Mon, Tues, & Thurs 10-5; Fri 10-4, Wed-closed"
+      "description": "Mon, Tues, & Thurs 10-5, Fri 10-4, Wed-closed"
     },
     {
       "name": "Country Villa",
@@ -145,7 +145,7 @@
     {
       "name": "Fairington Senior",
       "phone": "447-4115",
-      "description": "Wednesday from 10-12 & 1-3 will mail application"
+      "description": "Wednesday from 10-12 & 1-3. Will mail application"
     },
     {
       "name": "Friendship House Senior",
@@ -415,7 +415,7 @@
     },
     {
       "name": "Livesay Mgmt",
-      "phone": "",
+      "phone": "743-5587",
       "description": ""
     },
     {
@@ -430,7 +430,7 @@
     },
     {
       "name": "Main Street Management",
-      "phone": "",
+      "phone": "742-6390",
       "description": ""
     }
   ]

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
@@ -8,12 +7,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 export default function VeteranAccordion() {
   return (
     <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
-        <Typography>Veterans</Typography>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography sx={{ fontWeight: 600 }}>
+          Veteran qualifications and services
+        </Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Typography>
@@ -21,11 +18,11 @@ export default function VeteranAccordion() {
           Services, you must:
         </Typography>
         <Typography>
-          - Be located in Benton, Clinton, Carroll, White, Tippecanoe, Fountain,
+          - be located in Benton, Clinton, Carroll, White, Tippecanoe, Fountain,
           Warren, Montgomery Counties
         </Typography>
         <Typography>
-          - Be at-at risk for or already experiencing homelessness
+          - be at-at risk for or already experiencing homelessness
         </Typography>
       </AccordionDetails>
     </Accordion>

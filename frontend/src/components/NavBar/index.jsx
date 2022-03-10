@@ -1,4 +1,3 @@
-import * as React from 'react'
 import scroller from 'react-scroll'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -12,13 +11,14 @@ import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
+import { useState } from 'react'
 
 const pages = ['Home', 'About', 'Contact', 'Service']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [anchorElNav, setAnchorElNav] = useState(null)
+  const [anchorElUser, setAnchorElUser] = useState(null)
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
   }

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
@@ -8,12 +7,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 export default function VeteranAccordion() {
   return (
     <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
-        <Typography>Families</Typography>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography sx={{ fontWeight: 600 }}>
+          Family qualifications and services
+        </Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Typography>
@@ -21,18 +18,24 @@ export default function VeteranAccordion() {
           Services, you must:
         </Typography>
         <Typography>
-          - be located in Tippecanoe County, IN; and <br />- not have any
-          housing (this includes not having friends/family to stay with)
+          - be located in Tippecanoe County, IN
+          <br />- not have any housing (this includes not having friends/family
+          to stay with)
         </Typography>
-        <Typography>Resources: </Typography>
+        <Typography sx={{ mt: 1, fontWeight: 600 }}>Resources: </Typography>
         <Typography>
-          LUM also hosts an overnight warming station at their shelter location.
-          Their website is&nbsp;
-          <a href="https://www.lumserve.org">www.lumserve.org</a>.
-          <br /> Families who need shelter should call 765-423-4880 or
-          email&nbsp;
-          <a href="mailto:families@lthc.net">families@lthc.net</a>&nbsp; for
+          Families who need shelter should call{' '}
+          <a href="tel:7654234880">765-423-4880</a> or email{' '}
+          <a href="mailto:families@lthc.net">families@lthc.net</a> for
           instructions due to the lack of shelter options.
+        </Typography>
+        <Typography>
+          Tippecanoe County does not regularly have emergency openings for
+          family shelter (at Family Promise or the YWCA Domestic Violence
+          Shelter). Families who need shelter should call{' '}
+          <a href="tel:7654234880">765-423-4880</a> or email{' '}
+          <a href="families@lthc.net">families@lthc.net</a> for instructions due
+          to the lack of shelter options.
         </Typography>
       </AccordionDetails>
     </Accordion>
