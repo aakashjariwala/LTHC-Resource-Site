@@ -3,6 +3,7 @@ import { scroller } from 'react-scroll'
 import FirstView from '../../components/About'
 import RequirementAccordion from '../../components/RequirementAccordion'
 import Resources from '../../components/Resources'
+import Contacts from '../../components/Contacts'
 
 function Main() {
   return (
@@ -10,6 +11,7 @@ function Main() {
       <FirstView />
       <RequirementAccordion />
       <Resources />
+      <Contacts />
     </Container>
   )
 }

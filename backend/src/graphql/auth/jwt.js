@@ -6,7 +6,7 @@ export const verifyJwt = (token) => {
     console.error('No JWT signage secret!')
     return false
   }
-  return verify(token, secret) !== undefined
+  return verify(token, secret)
 }
 
 export const generateJwt = (payload) => {
