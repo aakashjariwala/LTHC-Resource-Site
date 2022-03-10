@@ -10,8 +10,8 @@ export default function RequirementAccordion() {
         Resources
       </Typography>
       <Box mt={4}>
-        <FamilyAccordion />
         <IndividualAccordion />
+        <FamilyAccordion />
         <VeteranAccordion />
       </Box>
     </Stack>
