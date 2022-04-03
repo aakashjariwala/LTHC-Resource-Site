@@ -36,9 +36,30 @@ export default function SiteData() {
     setAboutText(text.substring(idx + begin.length, endIdx).trim())
   }
 
+  const parseContacts = (text) => {
+    const begin = '<begin:section:contacts>'
+    const end = '<end:section:contacts>'
+
+    const bIdx = text.indexOf('<begin:contacts:')
+    const endTag = text.indexOf('>', bIdx)
+    const contactType = text.substring(bIdx + '<begin:contacts:'.length, endTag)
+
+    const eIdx = text.indexOf(`<end:contacts:${contactType}>`)
+
+    console.log(
+      text
+        .substring(bIdx + `<begin:contacts:${contactType}>`.length, eIdx)
+        .trim()
+    )
+
+    const contracts = text
+      .substring(bIdx + `<begin:contacts:${contactType}>`.length, eIdx)
+      .trim()
+  }
+
   const parseText = (text) => {
-    // TODO parse text
     console.log(text)
+    parseContacts(text)
     parseAbout(text)
   }
 
