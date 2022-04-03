@@ -15,15 +15,12 @@ export default function individualAccordion() {
       <AccordionDetails>
         <Typography>
           If you are an individual, to qualify for services at LTHC Homeless
-          Services, you must:
-        </Typography>
-        <Typography>
-          - be located in Tippecanoe County, IN
+          Services, you must: - be located in Tippecanoe County, IN
           <br />- not have any housing (this includes not having friends/family
           to stay with)
-        </Typography>
-        <Typography sx={{ mt: 1, fontWeight: 600 }}>Resources: </Typography>
-        <Typography>
+          <br />
+          <br />
+          <b>Resources: </b>
           If you are an individual, LUM (Lafayette Urban Ministry) is the
           primary shelter in Greater Lafayette. They accept registration on
           weekdays between 7 - 11 am and 6 - 7 am on Saturdays. If you receive a

@@ -3,8 +3,12 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'
 import constants from '../../constants/about.json'
+// eslint-disable-next-line import/no-cycle
+import { useSiteDataContext } from '../../views/Main'
 
 function About() {
+  const { aboutText } = useSiteDataContext()
+
   return (
     <Container sx={{ backgroundColor: '#2F579B', display: 'flex', p: 2 }}>
       <Container
@@ -43,35 +47,8 @@ function About() {
               color: '#2F579B',
               fontFamily: 'sans-serif',
             }}
-            dangerouslySetInnerHTML={{ __html: constants.about }}
+            dangerouslySetInnerHTML={{ __html: aboutText }}
           />
-          {/* <Typography
-            variant="h4"
-            sx={{ color: '#2F579B', fontFamily: 'sans-serif' }}
-          >
-            <b>Please select one of the following:</b>
-          </Typography>
-
-          <Stack direction={{ xs: 'column', md: 'row' }}>
-            <Button
-              variant="outlined"
-              sx={{ borderRadius: 3, border: 2, margin: '15px' }}
-            >
-              Veteran
-            </Button>
-            <Button
-              variant="outlined"
-              sx={{ borderRadius: 3, border: 2, margin: '15px' }}
-            >
-              Individual
-            </Button>
-            <Button
-              variant="outlined"
-              sx={{ borderRadius: 3, border: 2, margin: '15px' }}
-            >
-              Family
-            </Button>
-          </Stack> */}
         </Stack>
       </Container>
     </Container>
