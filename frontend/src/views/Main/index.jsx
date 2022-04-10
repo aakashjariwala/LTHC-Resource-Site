@@ -1,7 +1,7 @@
-import { Container } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import { createContext, useContext, useEffect } from 'react'
 // eslint-disable-next-line import/no-cycle
-import FirstView from '../../components/About'
+import AboutView from '../../components/About'
 import RequirementAccordion from '../../components/RequirementAccordion'
 import Resources from '../../components/Resources'
 import Contacts from '../../components/Contacts'
@@ -19,13 +19,31 @@ function Main() {
   return (
     <SiteDataContext.Provider value={siteData}>
       <Container sx={{ py: 5 }}>
-        <FirstView />
-        <RequirementAccordion />
-        <Resources />
-        <Contacts />
-        {siteData.sectionsToShow.map((section) => (
-          <Section key={section} sectionText={section} />
-        ))}
+        {siteData.sectionsToShow.map((section) => {
+          if (section.type === 'section') {
+            return <Section key={section.text} section={section} />
+          }
+          if (section.type === 'about') {
+            return <AboutView key={section.type} />
+          }
+          if (section.type === 'resources') {
+            // TODO
+            // return <Resources />
+          }
+          if (section.type === 'additional resources') {
+            // TODO
+            // return <RequirementAccordion />
+          }
+          if (section.type === 'contacts') {
+            // TODO
+            // return <Contacts />
+          }
+          return (
+            <Typography key={Math.random().toString(16).substr(2, 8)}>
+              Bad parsing
+            </Typography>
+          )
+        })}
       </Container>
     </SiteDataContext.Provider>
   )

@@ -8,7 +8,6 @@ const pdfPath = '2022/04/pdf-template-1.pdf'
 
 export default function SiteData() {
   const [aboutText, setAboutText] = useState('')
-
   const [sectionsToShow, setSectionsToShow] = useState([])
 
   useEffect(() => {
@@ -27,7 +26,7 @@ export default function SiteData() {
           parseText(text)
         }
       })
-    // .catch((err) => console.log(err))
+      .catch((err) => console.log(err))
   }, [])
 
   const parseAbout = (text) => {
@@ -35,34 +34,67 @@ export default function SiteData() {
     const end = '<end:section:about>'
     const idx = text.indexOf(begin)
     const endIdx = text.indexOf(end)
-    console.log(idx, endIdx, text.substring(idx + begin.length, endIdx).trim())
-    setAboutText(text.substring(idx + begin.length, endIdx).trim())
+    const parsed = text.substring(idx + begin.length, endIdx).trim()
+    setAboutText(parsed)
   }
 
   const parseSection = (text) => {
     let newText = text
     let idx = newText.indexOf('<begin:section>')
-    const sections = []
-    while (idx !== -1) {
-      const end = newText.indexOf('<end:section>')
-      const sectionText = newText
-        .substring(idx + '<begin:section>'.length, end)
-        .trim()
-      // console.log(sectionText)
-      newText =
-        newText.substring(0, idx) +
-        newText.substring(end + '<end:section>'.length, newText.length)
-      idx = newText.indexOf('<begin:section>')
-      sections.push(sectionText)
-    }
-    console.log(sections)
-    setSectionsToShow(sections)
+    const end = newText.indexOf('<end:section>')
+    const sectionText = newText
+      .substring(idx + '<begin:section>'.length, end)
+      .trim()
+    newText =
+      newText.substring(0, idx) +
+      newText.substring(end + '<end:section>'.length, newText.length)
+    idx = newText.indexOf('<begin:section>')
+    return { type: 'section', text: sectionText }
   }
 
   const parseText = (text) => {
-    // TODO parse text
-    parseAbout(text)
-    parseSection(text)
+    let newText = text
+    let idx = newText.indexOf('<begin:section')
+    const sections = []
+    while (idx !== -1) {
+      const tagType = newText.substring(
+        idx + '<begin:section'.length,
+        newText.indexOf('>')
+      )
+      let endTag = ''
+      if (tagType === ':about') {
+        parseAbout(newText)
+        sections.push({ type: 'about' })
+        endTag = '<end:section:about>'
+      } else if (tagType === ':resources') {
+        // TODO parse(newText)
+        sections.push({ type: 'resources' })
+        endTag = '<end:section:resources>'
+      } else if (tagType === ':additional resources') {
+        // TODO parse(newText)
+        sections.push({ type: 'additional resources' })
+        endTag = '<end:section:additional resources>'
+      } else if (tagType === ':contacts') {
+        // TODO parse(newText)
+        sections.push({ type: 'contacts' })
+        endTag = '<end:section:contacts>'
+      } else if (tagType === '') {
+        sections.push(parseSection(newText))
+        endTag = '<end:section>'
+      } else {
+        console.error(`Bad parsing: invalid "${tagType}" tag!`)
+        return
+      }
+      newText =
+        newText.substring(0, idx) +
+        newText.substring(
+          newText.indexOf(`<end:section${tagType}>`) + endTag.length,
+          newText.length
+        )
+      idx = newText.indexOf('<begin:section')
+    }
+    console.log(sections)
+    setSectionsToShow(sections)
   }
 
   return { aboutText, sectionsToShow }
