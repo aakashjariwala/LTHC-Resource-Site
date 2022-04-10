@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf'
 import axios from 'axios'
 import { convertDataURIToBinary, pdfAsArray } from './parsePdf'
 
@@ -7,6 +8,8 @@ const pdfPath = '2022/04/pdf-template-1.pdf'
 
 export default function SiteData() {
   const [aboutText, setAboutText] = useState('')
+
+  const [sectionsToShow, setSectionsToShow] = useState([])
 
   useEffect(() => {
     axios
@@ -24,7 +27,7 @@ export default function SiteData() {
           parseText(text)
         }
       })
-      .catch((err) => console.log(err))
+    // .catch((err) => console.log(err))
   }, [])
 
   const parseAbout = (text) => {
@@ -36,11 +39,31 @@ export default function SiteData() {
     setAboutText(text.substring(idx + begin.length, endIdx).trim())
   }
 
-  const parseText = (text) => {
-    // TODO parse text
-    console.log(text)
-    parseAbout(text)
+  const parseSection = (text) => {
+    let newText = text
+    let idx = newText.indexOf('<begin:section>')
+    const sections = []
+    while (idx !== -1) {
+      const end = newText.indexOf('<end:section>')
+      const sectionText = newText
+        .substring(idx + '<begin:section>'.length, end)
+        .trim()
+      // console.log(sectionText)
+      newText =
+        newText.substring(0, idx) +
+        newText.substring(end + '<end:section>'.length, newText.length)
+      idx = newText.indexOf('<begin:section>')
+      sections.push(sectionText)
+    }
+    console.log(sections)
+    setSectionsToShow(sections)
   }
 
-  return { aboutText }
+  const parseText = (text) => {
+    // TODO parse text
+    parseAbout(text)
+    parseSection(text)
+  }
+
+  return { aboutText, sectionsToShow }
 }
