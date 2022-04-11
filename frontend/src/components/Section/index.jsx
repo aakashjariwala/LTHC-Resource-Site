@@ -1,9 +1,14 @@
-import { Container, Typography } from '@mui/material'
+import { Container, Box, Typography } from '@mui/material'
 
 const Section = ({ section }) => {
   return (
     <Container>
-      <Typography variant="body1">{section.text}</Typography>
+      {section?.title && (
+        <Typography variant="h6" sx={{ textAlign: 'center' }}>
+          {section.title}
+        </Typography>
+      )}
+      <Box dangerouslySetInnerHTML={{ __html: section.text }} />
     </Container>
   )
 }

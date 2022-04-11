@@ -2,7 +2,6 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'
-import constants from '../../constants/about.json'
 // eslint-disable-next-line import/no-cycle
 import { useSiteDataContext } from '../../views/Main'
 
