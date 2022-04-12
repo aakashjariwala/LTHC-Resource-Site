@@ -3,7 +3,7 @@ import axios from 'axios'
 import { convertDataURIToBinary, pdfAsArray } from './parsePdf'
 
 // TODO put in .env
-const pdfPath = '2022/04/pdf-template-4.pdf'
+const pdfPath = '2022/04/pdf-template-6.pdf'
 
 export default function SiteData() {
   const [aboutText, setAboutText] = useState('')
