@@ -23,7 +23,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/upload" element={<UploadPdf />} />
+            <Route path="/upload" exact element={<UploadPdf />} />
+            <Route path="/temp" element={<div>test</div>} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
