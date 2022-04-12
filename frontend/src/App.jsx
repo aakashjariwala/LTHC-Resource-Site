@@ -22,8 +22,8 @@ function App() {
         <CssBaseline />
         <BrowserRouter>
           <Routes>
-            {/* <Route path="/" element={<Main />} /> */}
-            <Route path="/" exact element={<UploadPdf />} />
+            <Route path="/upload" exact element={<UploadPdf />} />
+            <Route path="/" element={<Main />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
