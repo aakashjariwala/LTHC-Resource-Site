@@ -48,7 +48,7 @@ export default function UploadPdf() {
 
   return (
     <Container sx={{ py: 4 }}>
-      <Typography variant="h6">Upload PDF to modify website</Typography>
+      {/* <Typography variant="h6">Upload PDF to modify website</Typography>
 
       <Box mt={2}>
         <input
@@ -72,7 +72,7 @@ export default function UploadPdf() {
             </Button>
           )
         })()}
-      </Box>
+      </Box> */}
     </Container>
   )
 }
