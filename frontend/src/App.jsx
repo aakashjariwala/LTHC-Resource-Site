@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 import Main from './views/Main'
 import UploadPdf from './views/UploadPdf'
-import Temp from './views/temp'
+import Temp from './views/Temp'
 
 function App() {
   const theme = createTheme({
