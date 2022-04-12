@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 import Main from './views/Main'
-import NavBar from './components/NavBar'
+import UploadPdf from './views/UploadPdf'
 
 function App() {
   const theme = createTheme({
@@ -23,7 +23,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/navbar" element={<NavBar />} />
+            <Route path="/upload" element={<UploadPdf />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { convertDataURIToBinary, pdfAsArray } from './parsePdf'
-
-// TODO put in .env
-const pdfPath =
-  process.env.NODE_ENV === 'development'
-    ? '2022/04/pdf-template-6.pdf'
-    : 'https://jsbbvk.files.wordpress.com/2022/04/pdf-template-6.pdf'
+import { getPDFUrl } from './useFirebase'
 
 export default function SiteData() {
   const [aboutText, setAboutText] = useState('')
@@ -16,22 +11,28 @@ export default function SiteData() {
   const [contactsText, setContactsText] = useState({})
 
   useEffect(() => {
-    axios
-      .get(pdfPath, {
-        responseType: 'blob',
+    getPDFUrl()
+      .then((url) => {
+        axios
+          .get(url, {
+            responseType: 'blob',
+          })
+          .then((res) => {
+            const blob = res.data
+            const file = new File([blob], 'temp.pdf')
+            const fileReader = new FileReader()
+            fileReader.readAsDataURL(file)
+            fileReader.onloadend = async (event) => {
+              const array = convertDataURIToBinary(event.target.result)
+              const text = await pdfAsArray(array)
+              parseText(text)
+            }
+          })
+          .catch((err) => console.log(err))
       })
-      .then((res) => {
-        const blob = res.data
-        const file = new File([blob], 'temp.pdf')
-        const fileReader = new FileReader()
-        fileReader.readAsDataURL(file)
-        fileReader.onloadend = async (event) => {
-          const array = convertDataURIToBinary(event.target.result)
-          const text = await pdfAsArray(array)
-          parseText(text)
-        }
+      .catch((e) => {
+        if (e.code === 'storage/object-not-found') console.log('No pdf found')
       })
-      .catch((err) => console.log(err))
   }, [])
 
   const parseAbout = (text) => {
