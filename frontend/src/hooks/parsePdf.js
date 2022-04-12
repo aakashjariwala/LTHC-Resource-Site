@@ -1,7 +1,9 @@
-import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf'
-import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry'
+// import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf'
+import { pdfjs } from 'react-pdf'
+// import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry'
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`
+
 const BASE64_MARKER = ';base64,'
 
 export const convertDataURIToBinary = (dataURI) => {
@@ -22,7 +24,7 @@ export const pdfAsArray = (array) => {
   return new Promise((resolve) => {
     let documentText = ''
 
-    pdfjsLib
+    pdfjs
       .getDocument(array)
       .promise.then((doc) => {
         const { numPages } = doc
