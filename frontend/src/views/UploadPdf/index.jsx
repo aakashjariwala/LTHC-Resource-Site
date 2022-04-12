@@ -6,7 +6,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
-import { uploadPDF } from '../../hooks/useFirebase'
+// import { uploadPDF } from '../../hooks/useFirebase'
 
 export default function UploadPdf() {
   const inputRef = useRef(null)
@@ -36,7 +36,7 @@ export default function UploadPdf() {
     }
 
     setIsUploading(true)
-    await uploadPDF(file)
+    // await uploadPDF(file)
     setShowSuccess(true)
     inputRef.current.value = ''
     setFile(null)
