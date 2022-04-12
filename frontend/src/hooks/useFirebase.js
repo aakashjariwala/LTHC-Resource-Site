@@ -10,6 +10,9 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APPID,
 }
 
+if (!process.env.REACT_APP_APIKEY || !process.env.REACT_APP_APPID)
+  console.log('missing firebase keys!')
+
 const app = initializeApp(firebaseConfig)
 const storage = getStorage(app)
 

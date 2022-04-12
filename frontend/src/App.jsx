@@ -22,8 +22,9 @@ function App() {
         <CssBaseline />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/upload" element={<UploadPdf />} />
+            <Route path="/" exact element={<Main />} />
+            <Route path="/upload-pdf" exact element={<UploadPdf />} />
+            <Route path="*" exact element={<h6>404 Page Not Found</h6>} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
