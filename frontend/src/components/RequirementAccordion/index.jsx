@@ -17,7 +17,7 @@ export default function RequirementAccordion() {
       <Typography variant="h6" sx={{ textAlign: 'center' }}>
         Resources
       </Typography>
-      <Box mt={4}>
+      <Box mt={4} sx={{ width: '100%' }}>
         {resourcesText.map(({ tag, text }) => (
           <Accordion key={tag}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
