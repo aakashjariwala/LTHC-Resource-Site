@@ -39,7 +39,7 @@ export default function UploadPdf() {
 
     const allowedExtensions = /(\.pdf)$/i
     if (!allowedExtensions.exec(file.name)) {
-      alert('Invalid file type')
+      // alert('Invalid file type')
       inputRef.current.value = ''
       return
     }
