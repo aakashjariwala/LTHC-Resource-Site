@@ -48,6 +48,7 @@ export default function UploadPdf() {
     await uploadPDF(file)
     setShowSuccess(true)
     inputRef.current.value = ''
+    setPhrase('')
     setFile(null)
   }
 
