@@ -3,16 +3,33 @@ import axios from 'axios'
 import { convertDataURIToBinary, pdfAsArray } from './parsePdf'
 import { getPDFUrl } from './useFirebase'
 
-export default function SiteData() {
+export default function SiteData(preview, pdf) {
   const [aboutText, setAboutText] = useState('')
   const [sectionsToShow, setSectionsToShow] = useState([])
   const [additionalResourcesText, setAdditionalResourcesText] = useState([])
   const [resourcesText, setResourcesText] = useState([])
   const [contactsText, setContactsText] = useState({})
+  const [isParsing, setIsParsing] = useState(false)
 
   useEffect(() => {
+    if (preview) {
+      if (!pdf) return
+      setIsParsing(true)
+
+      const fileReader = new FileReader()
+      fileReader.readAsDataURL(pdf)
+      fileReader.onloadend = async (event) => {
+        const array = convertDataURIToBinary(event.target.result)
+        const text = await pdfAsArray(array)
+        parseText(text)
+      }
+      return
+    }
+
     getPDFUrl()
       .then((url) => {
+        setIsParsing(true)
+
         axios
           .get(url, {
             responseType: 'blob',
@@ -33,7 +50,7 @@ export default function SiteData() {
       .catch((e) => {
         if (e.code === 'storage/object-not-found') console.log('No pdf found')
       })
-  }, [])
+  }, [preview, pdf])
 
   const parseAbout = (text) => {
     const begin = '<begin:section:about>'
@@ -242,6 +259,7 @@ export default function SiteData() {
       idx = newText.indexOf('<begin:section')
     }
     setSectionsToShow(sections)
+    setIsParsing(false)
   }
 
   return {
@@ -250,5 +268,6 @@ export default function SiteData() {
     additionalResourcesText,
     resourcesText,
     contactsText,
+    isParsing,
   }
 }

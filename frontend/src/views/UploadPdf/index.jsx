@@ -1,17 +1,20 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import CheckIcon from '@mui/icons-material/Check'
 import {
   CircularProgress,
   Container,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { uploadPDF } from '../../hooks/useFirebase'
+import Main from '../Main'
 
 export default function UploadPdf() {
   const inputRef = useRef(null)
-  const [file, setFile] = useState()
+  const [file, setFile] = useState(null)
   const [isUploading, setIsUploading] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [phrase, setPhrase] = useState('')
@@ -68,20 +71,19 @@ export default function UploadPdf() {
           ref={inputRef}
         />
       </Box>
-      <Box mt={3}>
+      <Stack mt={4} direction="row" alignItems="center">
         <TextField
           label="Passphrase"
-          variant="standard"
+          variant="outlined"
           autoComplete="off"
           value={phrase}
           onChange={(e) => setPhrase(e.target.value.trim())}
+          sx={{ mr: 2 }}
         />
-      </Box>
-      <Box mt={3}>
         {(() => {
           if (isUploading)
             return showSuccess ? (
-              <Typography>Success!</Typography>
+              <CheckIcon sx={{ color: '#07bc0c', fontSize: '32px' }} />
             ) : (
               <CircularProgress />
             )
@@ -101,6 +103,14 @@ export default function UploadPdf() {
             </Button>
           )
         })()}
+      </Stack>
+
+      <Box mt={8}>
+        <Typography variant="h6">PDF Preview</Typography>
+        <hr />
+      </Box>
+      <Box>
+        <Main preview pdf={file} />
       </Box>
     </Container>
   )
