@@ -28,7 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "prod": "docker-compose -f ./docker-compose.prod.yml up -d"
+    "prod": "docker-compose up -d"
   },
   "eslintConfig": {
     "extends": [
