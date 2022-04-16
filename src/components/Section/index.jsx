@@ -1,6 +1,6 @@
 import { Container, Box, Typography } from '@mui/material'
 
-const Section = ({ section }) => {
+function Section({ section }) {
   return (
     <Container>
       {section?.title && (

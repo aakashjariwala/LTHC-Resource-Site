@@ -17,18 +17,16 @@ function App() {
     },
   })
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" exact element={<Main />} />
-            <Route path="/upload-pdf" exact element={<UploadPdf />} />
-            <Route path="*" exact element={<h6>404 Page Not Found</h6>} />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact element={<Main />} />
+          <Route path="/upload-pdf" exact element={<UploadPdf />} />
+          <Route path="*" exact element={<h6>404 Page Not Found</h6>} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }
 
