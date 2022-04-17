@@ -57,6 +57,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
+          command_timeout: 200m
 
           # cd into respective directory and start docker
           script: |
