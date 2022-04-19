@@ -41,7 +41,7 @@ jobs:
             docker-compose -p lthc-app down
             rm -rf ~/LTHC && mkdir ~/LTHC
 
-      name: Adding environment variables
+      - name: Adding environment variables
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
