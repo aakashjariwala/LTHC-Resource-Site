@@ -50,13 +50,13 @@ jobs:
           # create .env file with env keys
           script: |
             rm .env
-            echo ${{ REACT_APP_API_KEY }} >> .env
-            echo ${{ REACT_APP_APP_ID }} >> .env
-            echo ${{ REACT_APP_AUTH_DOMAIN }} >> .env
-            echo ${{ REACT_APP_PROJECT_ID }} >> .env
-            echo ${{ REACT_APP_STORAGE_BUCKET }} >> .env
-            echo ${{ REACT_APP_MESSAGING_SENDER_ID }} >> .env
-            echo ${{ REACT_APP_MEASUREMENT_ID }} >> .env
+            echo ${{ secrets.REACT_APP_API_KEY }} >> .env
+            echo ${{ secrets.REACT_APP_APP_ID }} >> .env
+            echo ${{ secrets.REACT_APP_AUTH_DOMAIN }} >> .env
+            echo ${{ secrets.REACT_APP_PROJECT_ID }} >> .env
+            echo ${{ secrets.REACT_APP_STORAGE_BUCKET }} >> .env
+            echo ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }} >> .env
+            echo ${{ secrets.REACT_APP_MEASUREMENT_ID }} >> .env
 
       - name: Copy repository to server
         uses: appleboy/scp-action@master
