@@ -49,7 +49,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           # create .env file with env keys
           script: |
-            rm .env
+            touch .env && rm .env
             echo ${{ secrets.REACT_APP_API_KEY }} >> .env
             echo ${{ secrets.REACT_APP_APP_ID }} >> .env
             echo ${{ secrets.REACT_APP_AUTH_DOMAIN }} >> .env
