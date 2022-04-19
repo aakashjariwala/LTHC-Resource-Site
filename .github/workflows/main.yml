@@ -7,6 +7,7 @@ on:
   # Triggers the workflow on a push to the main branch
   push:
     branches: [master]
+  # Allow manual trigger
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -15,8 +16,6 @@ jobs:
   deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # This workflow assumes that NPM/NodeJS is installed on the target system
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -30,7 +29,7 @@ jobs:
           cp -TR . ../build
           tar -cvf deploy.tar ../build/
 
-      - name: Clean up existing setup
+      - name: Cleaning up existing setup
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -42,6 +41,23 @@ jobs:
             docker-compose -p lthc-app down
             rm -rf ~/LTHC && mkdir ~/LTHC
 
+      name: Adding environment variables
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          # create .env file with env keys
+          script: |
+            rm .env
+            echo ${{ REACT_APP_API_KEY }} >> .env
+            echo ${{ REACT_APP_APP_ID }} >> .env
+            echo ${{ REACT_APP_AUTH_DOMAIN }} >> .env
+            echo ${{ REACT_APP_PROJECT_ID }} >> .env
+            echo ${{ REACT_APP_STORAGE_BUCKET }} >> .env
+            echo ${{ REACT_APP_MESSAGING_SENDER_ID }} >> .env
+            echo ${{ REACT_APP_MEASUREMENT_ID }} >> .env
+
       - name: Copy repository to server
         uses: appleboy/scp-action@master
         with:
@@ -51,16 +67,24 @@ jobs:
           source: 'deploy.tar'
           target: '~/LTHC/'
 
-      - name: Setup and start app
+      - name: Setup app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            cd ~/LTHC
+            tar xf deploy.tar && rm deploy.tar && mv build/* . && rm -rf build/
+
+      - name: Start docker
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           command_timeout: 200m
-
           # cd into respective directory and start docker
           script: |
             cd ~/LTHC
-            tar xf deploy.tar && rm deploy.tar && mv build/* . && rm -rf build/
             docker-compose -p lthc-app up -d
