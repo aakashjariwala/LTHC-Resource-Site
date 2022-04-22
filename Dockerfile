@@ -1,15 +1,10 @@
 FROM node:16-alpine3.12 as builder
 ENV NODE_ENV production
-
 WORKDIR /app
-
 COPY package.json ./
 COPY package-lock.json ./
-
-RUN npm install --production
-
+RUN npm install
 COPY . .
-
 RUN npm run build
 
 FROM nginx:stable-alpine as production
