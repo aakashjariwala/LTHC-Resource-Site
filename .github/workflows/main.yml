@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           # take down docker compose
           script: |
-            cd ~
+            cd ~/LTHC
             docker-compose -p lthc-app down
             rm -rf ~/LTHC && mkdir ~/LTHC
 
