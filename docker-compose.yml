@@ -8,5 +8,4 @@ services:
       context: .
       target: production
     ports:
-      # TODO will have to update exposed port
-      - 3000:80
+      - $LTHC_FRONTEND_PORT:80
