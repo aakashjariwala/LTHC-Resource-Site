@@ -6,6 +6,5 @@ services:
     image: lthc-prod
     build:
       context: .
-      target: production
     ports:
       - $LTHC_PORT:80
