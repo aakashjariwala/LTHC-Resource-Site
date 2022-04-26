@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import {
+  Box,
   createTheme,
   CssBaseline,
   ThemeProvider,
@@ -26,22 +27,32 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" exact element={<Main />} />
-          <Route path="/upload-pdf" exact element={<UploadPdf />} />
-          <Route
-            path="*"
-            exact
-            element={
-              <Typography variant="h5" sx={{ pt: 5, textAlign: 'center' }}>
-                404 Page Not Found
-              </Typography>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-      <Footer />
+      <Box
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Box sx={{ flex: 1 }}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" exact element={<Main />} />
+              <Route path="/upload-pdf" exact element={<UploadPdf />} />
+              <Route
+                path="*"
+                exact
+                element={
+                  <Typography variant="h5" sx={{ pt: 5, textAlign: 'center' }}>
+                    404 Page Not Found
+                  </Typography>
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </Box>
+        <Footer />
+      </Box>
     </ThemeProvider>
   )
 }

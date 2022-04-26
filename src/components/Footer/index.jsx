@@ -6,7 +6,7 @@ export default function Footer() {
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
-    <div style={{ position: 'static', bottom: 0, width: '100%' }}>
+    <div style={{ width: '100%' }}>
       <footer
         style={{
           bottom: 0,
