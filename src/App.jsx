@@ -22,28 +22,27 @@ function App() {
       button: { textTransform: 'none' },
     },
   })
+
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" exact element={<Main />} />
-            <Route path="/upload-pdf" exact element={<UploadPdf />} />
-            <Route
-              path="*"
-              exact
-              element={
-                <Typography variant="h5" sx={{ pt: 5, textAlign: 'center' }}>
-                  404 Page Not Found
-                </Typography>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact element={<Main />} />
+          <Route path="/upload-pdf" exact element={<UploadPdf />} />
+          <Route
+            path="*"
+            exact
+            element={
+              <Typography variant="h5" sx={{ pt: 5, textAlign: 'center' }}>
+                404 Page Not Found
+              </Typography>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
       <Footer />
-    </>
+    </ThemeProvider>
   )
 }
 
