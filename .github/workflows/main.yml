@@ -90,4 +90,4 @@ jobs:
           # cd into respective directory and start docker
           script: |
             cd ~/LTHC
-            docker-compose -p lthc-app up -d
+            docker-compose -p lthc-app up -d --build
