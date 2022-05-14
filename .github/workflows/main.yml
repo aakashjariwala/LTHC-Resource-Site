@@ -60,6 +60,8 @@ jobs:
             echo REACT_APP_MESSAGING_SENDER_ID=${{ secrets.REACT_APP_MESSAGING_SENDER_ID }} >> .env
             echo REACT_APP_MEASUREMENT_ID=${{ secrets.REACT_APP_MEASUREMENT_ID }} >> .env
             echo REACT_APP_LTHC_PASS=${{ secrets.REACT_APP_LTHC_PASS }} >> .env
+            echo REACT_APP_USER_EMAIL=${{ secrets.REACT_APP_USER_EMAIL }} >> .env
+            echo REACT_APP_USER_PASSWORD=${{ secrets.REACT_APP_USER_PASSWORD }} >> .env
 
       - name: Copy repository to server
         uses: appleboy/scp-action@master
