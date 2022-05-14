@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'firebase/storage'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -16,6 +17,17 @@ if (!process.env.REACT_APP_API_KEY || !process.env.REACT_APP_APP_ID)
 
 const app = initializeApp(firebaseConfig)
 const storage = getStorage(app)
+const auth = getAuth(app)
+
+signInWithEmailAndPassword(
+  auth,
+  process.env.REACT_APP_USER_EMAIL,
+  process.env.REACT_APP_USER_PASSWORD
+)
+  .then((userCred) => {
+    const { user } = userCred
+  })
+  .catch((e) => {})
 
 export const getPDFUrl = () => getDownloadURL(ref(storage, 'lthc/lthc.pdf'))
 
