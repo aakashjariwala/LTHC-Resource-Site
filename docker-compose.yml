@@ -6,7 +6,5 @@ services:
     image: lthc-prod
     build:
       context: .
-      target: production
     ports:
-      # TODO will have to update exposed port
-      - 3000:80
+      - $LTHC_PORT:80

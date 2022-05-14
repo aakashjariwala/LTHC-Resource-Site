@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           # take down docker compose
           script: |
-            cd ~
+            cd ~/LTHC
             docker-compose -p lthc-app down
             rm -rf ~/LTHC && mkdir ~/LTHC
 
@@ -51,6 +51,7 @@ jobs:
           script: |
             cd ~/LTHC
             touch .env && rm .env
+            cat /shared/projects.env >> .env
             echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }} >> .env
             echo REACT_APP_APP_ID=${{ secrets.REACT_APP_APP_ID }} >> .env
             echo REACT_APP_AUTH_DOMAIN=${{ secrets.REACT_APP_AUTH_DOMAIN }} >> .env
@@ -89,4 +90,4 @@ jobs:
           # cd into respective directory and start docker
           script: |
             cd ~/LTHC
-            docker-compose -p lthc-app up -d
+            docker-compose -p lthc-app up -d --build
