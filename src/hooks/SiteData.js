@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { convertDataURIToBinary, pdfAsArray } from './parsePdf'
-import { getPDFUrl } from './useFirebase'
+import useFirebase from './useFirebase'
 
 export default function SiteData(preview, pdf) {
+  const { getPDFUrl } = useFirebase()
   const [aboutText, setAboutText] = useState('')
   const [sectionsToShow, setSectionsToShow] = useState([])
   const [additionalResourcesText, setAdditionalResourcesText] = useState([])
@@ -29,7 +30,7 @@ export default function SiteData(preview, pdf) {
     getPDFUrl()
       .then((url) => {
         setIsParsing(true)
-
+        if (!url) return
         axios
           .get(url, {
             responseType: 'blob',
@@ -50,7 +51,7 @@ export default function SiteData(preview, pdf) {
       .catch((e) => {
         if (e.code === 'storage/object-not-found') console.log('No pdf found')
       })
-  }, [preview, pdf])
+  }, [preview, pdf, getPDFUrl])
 
   const parseAbout = (text) => {
     const begin = '<begin:section:about>'

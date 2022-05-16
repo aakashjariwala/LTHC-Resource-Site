@@ -9,10 +9,11 @@ import {
   Typography,
 } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
-import { uploadPDF } from '../../hooks/useFirebase'
+import useFirebase from '../../hooks/useFirebase'
 import Main from '../Main'
 
 export default function UploadPdf() {
+  const { uploadPDF } = useFirebase()
   const inputRef = useRef(null)
   const [file, setFile] = useState(null)
   const [isUploading, setIsUploading] = useState(false)

@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useCallback, useEffect, useState } from 'react'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -19,17 +20,31 @@ const app = initializeApp(firebaseConfig)
 const storage = getStorage(app)
 const auth = getAuth(app)
 
-signInWithEmailAndPassword(
-  auth,
-  process.env.REACT_APP_USER_EMAIL,
-  process.env.REACT_APP_USER_PASSWORD
-)
-  .then((userCred) => {
-    const { user } = userCred
-  })
-  .catch((e) => {})
+export default function useFirebase() {
+  const [uid, setUid] = useState()
 
-export const getPDFUrl = () => getDownloadURL(ref(storage, 'lthc/lthc.pdf'))
+  useEffect(() => {
+    signInWithEmailAndPassword(
+      auth,
+      process.env.REACT_APP_USER_EMAIL,
+      process.env.REACT_APP_USER_PASSWORD
+    )
+      .then((userCred) => {
+        const { user } = userCred
+        setUid(user.uid)
+      })
+      .catch(() => {})
+  }, [])
 
-export const uploadPDF = (pdf) =>
-  uploadBytes(ref(storage, 'lthc/lthc.pdf'), pdf)
+  const getPDFUrl = useCallback(async () => {
+    if (!uid) return ''
+    return getDownloadURL(ref(storage, `lthc/${uid}/lthc.pdf`))
+  }, [storage, uid])
+
+  const uploadPDF = useCallback(
+    (pdf) => uploadBytes(ref(storage, `lthc/${uid}/lthc.pdf`), pdf),
+    [storage, uid]
+  )
+
+  return { uid, getPDFUrl, uploadPDF }
+}
