@@ -38,7 +38,7 @@ jobs:
           # take down docker compose
           script: |
             cd ~/LTHC
-            docker-compose -p lthc-app down
+            docker compose -p lthc-app down
             rm -rf ~/LTHC && mkdir ~/LTHC
 
       - name: Adding environment variables
@@ -92,4 +92,4 @@ jobs:
           # cd into respective directory and start docker
           script: |
             cd ~/LTHC
-            docker-compose -p lthc-app up -d --build
+            docker compose -p lthc-app up -d --build
