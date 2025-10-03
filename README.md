@@ -6,7 +6,7 @@ A full-stack web application designed to provide curated resources and informati
 
 - **Languages:** JavaScript, HTML, CSS  
 - **Frontend:** React (component-based UI, responsive design)  
-- **Backend:** Node.js, Express.js  
+- **Backend:** Node.js, Express.js , Firebase 
 - **DevOps & Deployment:** Docker, NGINX  
 - **Tooling & Config:** Prettier, Git 
 
