@@ -1,8 +1,12 @@
+<p align="center">
+  <img src="public/LTHC LOGO.jpg" alt="CampusCircle Logo" width="300"/>
+</p>
+
 # LTHC Resource Site
 
 A full-stack web application designed to provide curated resources and information for the LTHC homeless services / housing crisis mission. This project highlights skills in modern web development, containerization, and deployment.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Languages:** JavaScript, HTML, CSS  
 - **Frontend:** React (component-based UI, responsive design)  
@@ -10,7 +14,7 @@ A full-stack web application designed to provide curated resources and informati
 - **DevOps & Deployment:** Docker, NGINX  
 - **Tooling & Config:** Prettier, Git 
 
-## 🌟 Key Features
+## Key Features
 
 - Dynamic routing and resource catalog functionality  
 - Responsive and accessible UI  
@@ -18,6 +22,6 @@ A full-stack web application designed to provide curated resources and informati
 - Containerized deployment with Docker and NGINX  
 - Maintainable codebase with linting, formatting, and environment configuration  
 
-## 📌 Highlights
+## Highlights
 
 This project demonstrates proficiency in building end-to-end web applications, with attention to scalability, maintainability, and real-world deployment practices. It also reflects experience working on mission-driven initiatives by supporting the goals of nonprofit resource organizations.
